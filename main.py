@@ -44,7 +44,14 @@ plt.xticks(range(len(words)), words, rotation=90)
 plt.xlabel("Words", fontsize = 14)
 plt.ylabel("Word Frequency", fontsize = 14)
 plt.title(f"Word Frequency in {base_name}.txt", fontsize = 16)
-plt.text(-3,5550,"Single most frequent word is ,")
+
+most_frequent_word = list(sortedList.keys())[0]
+most_frequent_count = sortedList[most_frequent_word]
+
+height_adjustment = 0.03 * most_frequent_count
+
+plt.text(-3,most_frequent_count + height_adjustment,f"Most frequent word is: {most_frequent_word}", fontsize=12)
+
 for word in ax.patches:
     text = str(word.get_height())
     text_x = word.get_x() + word.get_width() / 2
@@ -58,13 +65,18 @@ longWords = words[:50]
 longWords = sorted(longWords, key=len)
 frequency = [wordsList[longWords[i]] for i in range(50)]
 
+longest_word = longWords[-1]
+longest_word_count = wordsList[longest_word]
+
+height_adjustment = 0.20 * longest_word_count
+
 fig, ax = plt.subplots(figsize=(10, 10))
 plt.bar(range(len(longWords)), frequency, edgecolor = 'black')
 plt.xticks(range(len(longWords)), longWords, rotation = 90)
 plt.xlabel("Words", fontsize = 14)
 plt.ylabel("Word Frequency", fontsize = 14)
 plt.title(f"Long words in {base_name}.txt", fontsize = 16)
-plt.text(47,1.2,"Longest Word")
+plt.text(len(longWords)-1, longest_word_count + height_adjustment, f"Longest word: {longest_word}", fontsize=12)
 
 for word in ax.patches:
     text = str(word.get_height())
