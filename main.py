@@ -48,7 +48,7 @@ plt.text(-3,5550,"Single most frequent word is ,")
 for word in ax.patches:
     text = str(word.get_height())
     text_x = word.get_x() + word.get_width() / 2
-    text_y = word.get_height() + 0.05 * word.get_height()
+    text_y = word.get_height() + 0.07 * word.get_height()
     ax.text(text_x, text_y, text, ha='center', va='bottom', rotation='vertical')
 plt.show()
 
@@ -63,7 +63,7 @@ plt.bar(range(len(longWords)), frequency, edgecolor = 'black')
 plt.xticks(range(len(longWords)), longWords, rotation = 90)
 plt.xlabel("Words", fontsize = 14)
 plt.ylabel("Word Frequency", fontsize = 14)
-plt.title(f"Long words in {base_name}", fontsize = 16)
+plt.title(f"Long words in {base_name}.txt", fontsize = 16)
 plt.text(47,1.2,"Longest Word")
 
 for word in ax.patches:
@@ -71,4 +71,5 @@ for word in ax.patches:
     text_x = word.get_x() + word.get_width() / 2
     text_y = word.get_height() + 0.07 * word.get_height()
     ax.text(text_x, text_y, text, ha='center', va='bottom', rotation='horizontal')
+plt.tight_layout()
 plt.show()
