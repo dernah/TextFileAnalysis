@@ -3,12 +3,20 @@ import re
 import string
 import os
 #f = "Frankenstein.txt"
+
 wordsList = {}
 
-f = input("Enter a file name: ").strip()
+while True:
 
-if not f.lower().endswith('.txt'):
-    f += '.txt'
+    f = input("Enter a file name: ").strip()
+
+    if not f.lower().endswith('.txt'):
+        f += '.txt'
+
+    if os.path.exists(f):
+        break
+    else:
+        print(f"Error: the file '{f}' does not exist.")
 
 base_name = os.path.splitext(os.path.basename(f))[0]
 
