@@ -7,12 +7,10 @@ import os
 wordsList = {}
 
 while True:
-
     f = input("Enter a file name: ").strip()
 
     if not f.lower().endswith('.txt'):
         f += '.txt'
-
     if os.path.exists(f):
         break
     else:
@@ -20,26 +18,16 @@ while True:
 
 base_name = os.path.splitext(os.path.basename(f))[0]
 
-punct = list(string.punctuation)
-punct.pop(punct.index("'"))
+translation_table = str.maketrans('', '', string.punctuation)
+
 with open(f, 'r') as file:
     for line in file:
-        for letter in line:
-            for p in punct:
-                if letter == p:
-                    if letter in wordsList.keys():
-                        wordsList[letter] += 1
-                    else:
-                        wordsList[letter] = 1
-                    line.replace(letter," ")
-            words = line.split(" ")
+        cleaned_line = line.translate(translation_table)
+        words = cleaned_line.split()
         for word in words:
-            word = re.sub(r'[^\w\']', '', word)
-            if len(word) != 0:
-                if word in wordsList.keys():
-                    wordsList[word] += 1
-                else:
-                    wordsList[word] = 1
+            word = word.lower()
+            if word:
+                wordsList[word] = wordsList.get(word, 0) + 1
 
 sortedList = {i: j for i, j in sorted(wordsList.items(), key=lambda item: item[1], reverse=True)}
 
