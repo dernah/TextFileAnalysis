@@ -43,6 +43,9 @@ with open(f, 'r') as file:
 
 sortedList = {i: j for i, j in sorted(wordsList.items(), key=lambda item: item[1], reverse=True)}
 
+
+# FIRST GRAPH  --------------- WORD FREQUENCIES
+
 i = 0
 words = list(sortedList.keys())[:50]
 frequency = [sortedList[words[i]] for i in range(50)]
@@ -52,6 +55,8 @@ plt.xticks(range(len(words)), words, rotation=90)
 plt.xlabel("Words", fontsize = 14)
 plt.ylabel("Word Frequency", fontsize = 14)
 plt.title(f"Word Frequency in {base_name}.txt", fontsize = 16)
+
+plt.subplots_adjust(bottom=0.3)
 
 most_frequent_word = list(sortedList.keys())[0]
 most_frequent_count = sortedList[most_frequent_word]
@@ -65,7 +70,12 @@ for word in ax.patches:
     text_x = word.get_x() + word.get_width() / 2
     text_y = word.get_height() + 0.07 * word.get_height()
     ax.text(text_x, text_y, text, ha='center', va='bottom', rotation='vertical')
+
+plt.tight_layout()
 plt.show()
+
+# SECOND GRAPH  --------------- LONGEST WORDS
+
 
 words = list(wordsList.keys())
 words = sorted(words, key=len, reverse=True)
